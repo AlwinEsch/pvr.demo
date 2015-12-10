@@ -56,6 +56,7 @@ struct PVRDemoChannel
   std::string             strChannelName;
   std::string             strIconPath;
   std::string             strStreamURL;
+  std::string             strStreamFile;
   std::vector<PVRDemoEpgEntry> epg;
 };
 

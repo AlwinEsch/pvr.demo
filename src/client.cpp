@@ -22,6 +22,7 @@
 #include "client.h"
 #include "kodi/xbmc_pvr_dll.h"
 #include "PVRDemoData.h"
+#include "streamer.h"
 #include <p8-platform/util/util.h>
 
 using namespace std;
@@ -35,6 +36,7 @@ bool           m_bCreated       = false;
 ADDON_STATUS   m_CurStatus      = ADDON_STATUS_UNKNOWN;
 PVRDemoData   *m_data           = NULL;
 bool           m_bIsPlaying     = false;
+cLiveStreamer *m_streamer       = NULL;
 PVRDemoChannel m_currentChannel;
 
 /* User adjustable settings are saved here.
@@ -46,6 +48,9 @@ std::string g_strClientPath           = "";
 
 CHelper_libXBMC_addon *XBMC           = NULL;
 CHelper_libXBMC_pvr   *PVR            = NULL;
+CHelper_libXBMC_codec *CODEC          = NULL;
+CHelper_libKODI_guilib *GUI           = NULL;
+
 
 extern "C" {
 
@@ -68,9 +73,28 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
     return ADDON_STATUS_PERMANENT_FAILURE;
   }
 
+  GUI = new CHelper_libKODI_guilib;
+  if (!GUI->RegisterMe(hdl))
+  {
+    SAFE_DELETE(GUI);
+    SAFE_DELETE(XBMC);
+    return ADDON_STATUS_PERMANENT_FAILURE;
+  }
+
+  CODEC = new CHelper_libXBMC_codec;
+  if (!CODEC->RegisterMe(hdl))
+  {
+    SAFE_DELETE(CODEC);
+    SAFE_DELETE(GUI);
+    SAFE_DELETE(XBMC);
+    return ADDON_STATUS_PERMANENT_FAILURE;
+  }
+
   PVR = new CHelper_libXBMC_pvr;
   if (!PVR->RegisterMe(hdl))
   {
+    SAFE_DELETE(CODEC);
+    SAFE_DELETE(GUI);
     SAFE_DELETE(PVR);
     SAFE_DELETE(XBMC);
     return ADDON_STATUS_PERMANENT_FAILURE;
@@ -98,8 +122,14 @@ ADDON_STATUS ADDON_GetStatus()
 void ADDON_Destroy()
 {
   delete m_data;
+  delete m_streamer;
   m_bCreated = false;
   m_CurStatus = ADDON_STATUS_UNKNOWN;
+
+  SAFE_DELETE(PVR);
+  SAFE_DELETE(GUI);
+  SAFE_DELETE(XBMC);
+  SAFE_DELETE(CODEC);
 }
 
 bool ADDON_HasSettings()
@@ -164,7 +194,8 @@ PVR_ERROR GetAddonCapabilities(PVR_ADDON_CAPABILITIES* pCapabilities)
   pCapabilities->bSupportsRecordings      = true;
   pCapabilities->bSupportsRecordingsUndelete = true;
   pCapabilities->bSupportsTimers          = true;
-
+  pCapabilities->bHandlesInputStream      = true;
+  pCapabilities->bHandlesDemuxing         = true;
   return PVR_ERROR_NO_ERROR;
 }
 
@@ -222,16 +253,31 @@ PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio)
   return PVR_ERROR_SERVER_ERROR;
 }
 
+const char * GetLiveStreamURL(const PVR_CHANNEL &channel)
+{
+  return "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4";
+}
+
 bool OpenLiveStream(const PVR_CHANNEL &channel)
 {
   if (m_data)
   {
     CloseLiveStream();
 
-    if (m_data->GetChannel(channel, m_currentChannel))
+    try
     {
-      m_bIsPlaying = true;
-      return true;
+      if (m_data->GetChannel(channel, m_currentChannel))
+      {
+        m_streamer = new cLiveStreamer;
+        m_bIsPlaying = m_streamer->OpenChannel(channel, &m_currentChannel);
+        return m_bIsPlaying;
+      }
+    }
+    catch (std::exception e)
+    {
+      XBMC->Log(LOG_ERROR, "%s - %s", __FUNCTION__, e.what());
+      delete m_streamer;
+      m_streamer = NULL;
     }
   }
 
@@ -240,19 +286,60 @@ bool OpenLiveStream(const PVR_CHANNEL &channel)
 
 void CloseLiveStream(void)
 {
+  if (m_streamer)
+  {
+    m_streamer->Close();
+    delete m_streamer;
+    m_streamer = NULL;
+  }
+
   m_bIsPlaying = false;
+}
+
+void DemuxAbort(void)
+{
+  if (m_streamer)
+    m_streamer->Abort();
+}
+
+DemuxPacket* DemuxRead(void)
+{
+  try
+  {
+    if (m_streamer)
+      return m_streamer->Read();
+  }
+  catch (std::exception e)
+  {
+    XBMC->Log(LOG_ERROR, "%s - %s", __FUNCTION__, e.what());
+  }
+
+  return NULL;
+}
+
+int GetCurrentClientChannel(void)
+{
+  return m_currentChannel.iUniqueId;
 }
 
 bool SwitchChannel(const PVR_CHANNEL &channel)
 {
   CloseLiveStream();
-
   return OpenLiveStream(channel);
+}
+
+time_t GetPlayingTime()
+{
+  if (!m_streamer)
+    return 0;
+  return m_streamer->GetPlayingTime();
 }
 
 PVR_ERROR GetStreamProperties(PVR_STREAM_PROPERTIES* pProperties)
 {
-  return PVR_ERROR_NOT_IMPLEMENTED;
+  if (!m_streamer)
+    return PVR_ERROR_SERVER_ERROR;
+  return (m_streamer->GetStreamProperties(pProperties) ? PVR_ERROR_NO_ERROR : PVR_ERROR_SERVER_ERROR);
 }
 
 int GetChannelGroupsAmount(void)
@@ -346,7 +433,6 @@ int ReadLiveStream(unsigned char *pBuffer, unsigned int iBufferSize) { return 0;
 long long SeekLiveStream(long long iPosition, int iWhence /* = SEEK_SET */) { return -1; }
 long long PositionLiveStream(void) { return -1; }
 long long LengthLiveStream(void) { return -1; }
-const char * GetLiveStreamURL(const PVR_CHANNEL &channel) { return ""; }
 PVR_ERROR DeleteRecording(const PVR_RECORDING &recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR RenameRecording(const PVR_RECORDING &recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetRecordingPlayCount(const PVR_RECORDING &recording, int count) { return PVR_ERROR_NOT_IMPLEMENTED; }
@@ -356,8 +442,6 @@ PVR_ERROR GetRecordingEdl(const PVR_RECORDING&, PVR_EDL_ENTRY[], int*) { return 
 PVR_ERROR AddTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR UpdateTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
-void DemuxAbort(void) {}
-DemuxPacket* DemuxRead(void) { return NULL; }
 unsigned int GetChannelSwitchDelay(void) { return 0; }
 void PauseStream(bool bPaused) {}
 bool CanPauseStream(void) { return false; }

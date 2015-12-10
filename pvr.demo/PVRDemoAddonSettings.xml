@@ -7,7 +7,9 @@
       <number>1</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/01.png</icon>
-      <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <file>special://xbmc/addons/pvr.demo/data/test-stream_video_1.ts</file>
+      <!-- if defined as <file> becomes the internal stream handling on add-on used to become a test stream for e.g. 
+           RDS test. Only TS format is supportted! With <stream> reads Kodi itself the data. -->
     </channel>
     <channel>
       <name>Demo TV Channel 2</name>
@@ -97,7 +99,7 @@
       <number>1</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/01.png</icon>
-      <stream></stream>
+      <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_swr3.ts</file>
     </channel>
     <channel>
       <name>Demo Radio Channel 2</name>
@@ -105,7 +107,7 @@
       <number>2</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/02.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
     <channel>
       <name>Demo Radio Channel 3</name>
@@ -113,7 +115,7 @@
       <number>3</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/03.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
     <channel>
       <name>Demo Radio Channel 4</name>
@@ -121,7 +123,7 @@
       <number>4</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/04.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
     <channel>
       <name>Demo Radio Channel 5</name>
@@ -129,7 +131,7 @@
       <number>5</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/05.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
     <channel>
       <name>Demo Radio Channel 6</name>
@@ -137,7 +139,7 @@
       <number>6</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/06.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
     <channel>
       <name>Demo Radio Channel 7</name>
@@ -145,7 +147,7 @@
       <number>7</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/07.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
     <channel>
       <name>Demo Radio Channel 8</name>
@@ -153,7 +155,7 @@
       <number>8</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/08.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
     <channel>
       <name>Demo Radio Channel 9</name>
@@ -161,7 +163,7 @@
       <number>9</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/09.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
     <channel>
       <name>Demo Radio Channel 10</name>
@@ -169,7 +171,7 @@
       <number>10</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/10.png</icon>
-      <stream></stream>
+      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
     </channel>
 
     <!-- TV sub channels -->

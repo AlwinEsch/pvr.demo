@@ -22,9 +22,13 @@
 
 #include "kodi/libXBMC_addon.h"
 #include "kodi/libXBMC_pvr.h"
+#include "kodi/libXBMC_codec.h"
+#include "kodi/libKODI_guilib.h"
 
 extern bool                          m_bCreated;
 extern std::string                   g_strUserPath;
 extern std::string                   g_strClientPath;
 extern ADDON::CHelper_libXBMC_addon *XBMC;
+extern CHelper_libXBMC_codec        *CODEC;
+extern CHelper_libKODI_guilib       *GUI;
 extern CHelper_libXBMC_pvr          *PVR;

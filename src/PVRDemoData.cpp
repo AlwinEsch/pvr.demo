@@ -113,6 +113,10 @@ bool PVRDemoData::LoadDemoData(void)
       else
         channel.strStreamURL = strTmp;
 
+      /* stream file */
+      if (XMLUtils::GetString(pChannelNode, "file", strTmp))
+        channel.strStreamFile = strTmp;
+
       m_channels.push_back(channel);
     }
   }
@@ -470,6 +474,7 @@ bool PVRDemoData::GetChannel(const PVR_CHANNEL &channel, PVRDemoChannel &myChann
       myChannel.strChannelName    = thisChannel.strChannelName;
       myChannel.strIconPath       = thisChannel.strIconPath;
       myChannel.strStreamURL      = thisChannel.strStreamURL;
+      myChannel.strStreamFile     = thisChannel.strStreamFile;
 
       return true;
     }
