@@ -107,15 +107,15 @@
       <number>2</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/02.png</icon>
-      <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_br-klassik_1.ts</file>
+      <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_br-klassik_2.ts</file>
     </channel>
     <channel>
-      <name>Demo Radio Channel 3</name>
+      <name>Demo Radio Channel 3 (WDR4)</name>
       <radio>1</radio>
       <number>3</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/03.png</icon>
-      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
+      <data>special://xbmc/addons/pvr.demo/data/test-stream_radio_wdr4.ts</data>
     </channel>
     <channel>
       <name>Demo Radio Channel 4</name>
