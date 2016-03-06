@@ -118,12 +118,12 @@
       <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_wdr4.ts</file>
     </channel>
     <channel>
-      <name>Demo Radio Channel 4</name>
+      <name>Demo Radio Channel 4 (BR Klassik)</name>
       <radio>1</radio>
       <number>4</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/04.png</icon>
-      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
+      <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_br-klassik_1.ts</file>
     </channel>
     <channel>
       <name>Demo Radio Channel 5</name>
