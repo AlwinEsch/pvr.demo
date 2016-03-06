@@ -94,7 +94,7 @@
 
     <!-- Radio Channels -->
     <channel>
-      <name>Demo Radio Channel 1</name>
+      <name>Demo Radio Channel 1 (SWR3)</name>
       <radio>1</radio>
       <number>1</number>
       <encryption>0</encryption>
@@ -102,12 +102,12 @@
       <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_swr3.ts</file>
     </channel>
     <channel>
-      <name>Demo Radio Channel 2</name>
+      <name>Demo Radio Channel 2 (BR Klassik)</name>
       <radio>1</radio>
       <number>2</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/02.png</icon>
-      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
+      <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_br-klassik_1.ts</file>
     </channel>
     <channel>
       <name>Demo Radio Channel 3</name>
