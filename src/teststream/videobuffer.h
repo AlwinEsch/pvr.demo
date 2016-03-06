@@ -53,7 +53,7 @@ public:
   void AttachInput(bool attach);
 protected:
   cVideoBuffer();
-  PLATFORM::CTimeout m_Timer;
+  P8PLATFORM::CTimeout m_Timer;
   bool m_CheckEof;
   bool m_InputAttached;
   time_t m_bufferEndTime;

@@ -39,7 +39,7 @@
 #include <p8-platform/util/StringUtils.h>
 
 using namespace ADDON;
-using namespace PLATFORM;
+using namespace P8PLATFORM;
 
 cLiveStreamer::cLiveStreamer()
  : m_scanTimeout(10)

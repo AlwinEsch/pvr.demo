@@ -35,7 +35,7 @@
 #include "libsi/descriptor.h"
 
 using namespace ADDON;
-using namespace PLATFORM;
+using namespace P8PLATFORM;
 
 //#define dbgpatpmt(a...) fprintf(stderr, a)
 #define dbgpatpmt(a...)
