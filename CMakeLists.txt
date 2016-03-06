@@ -14,7 +14,7 @@ add_definitions(-DUSE_DEMUX)
 
 include_directories(${kodiplatform_INCLUDE_DIRS}
                     ${p8-platform_INCLUDE_DIRS}
-                    ${KODI_INCLUDE_DIR})
+                    ${KODI_INCLUDE_DIR}
                     ${PROJECT_SOURCE_DIR}/src
                     ${PROJECT_SOURCE_DIR}/src/teststream)
 
