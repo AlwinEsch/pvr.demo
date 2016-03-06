@@ -27,11 +27,11 @@
 
 #include "videobuffer.h"
 #include "config.h"
-#include "platform/threads/threads.h"
-#include "platform/util/StringUtils.h"
+#include "p8-platform/threads/threads.h"
+#include "p8-platform/util/StringUtils.h"
 
 using namespace ADDON;
-using namespace PLATFORM;
+using namespace P8PLATFORM;
 
 //-----------------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ protected:
   bool m_BufferFull;
   unsigned int m_Margin;
   unsigned int m_BytesConsumed;
-  PLATFORM::CMutex m_Mutex;
+  P8PLATFORM::CMutex m_Mutex;
 };
 
 cVideoBufferTimeshift::cVideoBufferTimeshift()

@@ -36,7 +36,7 @@
 
 #include <stdlib.h>
 #include <time.h>
-#include <platform/util/StringUtils.h>
+#include <p8-platform/util/StringUtils.h>
 
 using namespace ADDON;
 using namespace PLATFORM;

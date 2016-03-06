@@ -30,7 +30,7 @@
 #include "parser.h"
 #include "demuxer.h"
 
-#include "platform/threads/mutex.h"
+#include "p8-platform/threads/mutex.h"
 #include "kodi/xbmc_stream_utils.hpp"
 
 #include <vector>
@@ -48,7 +48,7 @@ private:
   void sendStreamStatus();
 
   uint32_t           m_scanTimeout;                  /*!> Channel scanning timeout (in seconds) */
-  PLATFORM::CTimeout m_last_tick;
+  P8PLATFORM::CTimeout m_last_tick;
   cDemuxer           m_Demuxer;
   cVideoBuffer      *m_VideoBuffer;
 

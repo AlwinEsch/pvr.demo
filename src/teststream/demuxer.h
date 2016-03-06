@@ -29,7 +29,7 @@
 #include <list>
 #include "config.h"
 #include "parser.h"
-#include "platform/threads/threads.h"
+#include "p8-platform/threads/threads.h"
 
 struct sStreamPacket;
 class cTSStream;
@@ -166,7 +166,7 @@ protected:
   int m_OldPmtVersion;
   bool m_WaitIFrame;
   cVideoBuffer *m_VideoBuffer;
-  PLATFORM::CMutex m_Mutex;
+  P8PLATFORM::CMutex m_Mutex;
   uint32_t m_MuxPacketSerial;
   sPtsWrap m_PtsWrap;
   uint16_t m_Error;
