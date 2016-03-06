@@ -115,7 +115,7 @@
       <number>3</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/03.png</icon>
-      <data>special://xbmc/addons/pvr.demo/data/test-stream_radio_wdr4.ts</data>
+      <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_wdr4.ts</file>
     </channel>
     <channel>
       <name>Demo Radio Channel 4</name>
