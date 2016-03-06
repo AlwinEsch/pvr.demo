@@ -66,6 +66,7 @@ cParserMPEG2Audio::cParserMPEG2Audio(int pID, cTSStream *stream, sPtsWrap *ptsWr
   m_RDSBuffer                 = NULL;
   m_RDSBufferSize             = 0;
   m_RDSExtPID                 = 0;
+  m_RDSStreamChange           = true;
 }
 
 cParserMPEG2Audio::~cParserMPEG2Audio()
@@ -164,7 +165,8 @@ void cParserMPEG2Audio::Parse(sStreamPacket *pkt, sStreamPacket *pkt_side_data)
         pkt_side_data->duration = 0;
         pkt_side_data->dts      = m_curDTS;
         pkt_side_data->pts      = m_curPTS;
-        pkt_side_data->streamChange = false;
+        pkt_side_data->streamChange = m_RDSStreamChange;
+        m_RDSStreamChange = false;
       }
     }
   }

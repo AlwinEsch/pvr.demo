@@ -47,6 +47,7 @@ private:
   int         m_RDSBufferSize;
   int         m_RDSBufferPtr;
   size_t      m_RDSBufferInitialSize;
+  bool        m_RDSStreamChange;
 
   int FindHeaders(uint8_t *buf, int buf_size);
 

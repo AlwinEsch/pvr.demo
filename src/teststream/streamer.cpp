@@ -142,7 +142,7 @@ DemuxPacket* cLiveStreamer::Read()
         m_pkt_side_data.data = NULL;
       }
 
-      if (m_pkt_data.streamChange || m_requestChange)
+      if (m_pkt_data.streamChange || m_requestChange || m_pkt_side_data.streamChange)
       {
         sendStreamChange();
         m_requestChange = false;
