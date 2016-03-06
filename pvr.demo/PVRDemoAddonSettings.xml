@@ -126,20 +126,20 @@
       <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_br-klassik_1.ts</file>
     </channel>
     <channel>
-      <name>Demo Radio Channel 5</name>
+      <name>Demo Radio Channel 5 (WDR 2)</name>
       <radio>1</radio>
       <number>5</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/05.png</icon>
-      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
+      <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_wdr2.ts</file>
     </channel>
     <channel>
-      <name>Demo Radio Channel 6</name>
+      <name>Demo Radio Channel 6 (B5 plus)</name>
       <radio>1</radio>
       <number>6</number>
       <encryption>0</encryption>
       <icon>special://xbmc/addons/pvr.demo/data/06.png</icon>
-      <stream>http://distribution.bbb3d.renderfarming.net/audio/bbb3d_sunflower_soundtrack_stereo.mp3</stream>
+      <file>special://xbmc/addons/pvr.demo/data/test-stream_radio_B5plus.ts</file>
     </channel>
     <channel>
       <name>Demo Radio Channel 7</name>
